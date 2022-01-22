@@ -1,4 +1,4 @@
-<%= render partial: 'users/list', locals: { user: @user, book: @book } %>
+<%= render partial: 'users/list', locals: { user: @user, book: Book.new } %>
 
 
   <div class="col-md-8 offset-md-1">
@@ -19,19 +19,22 @@
            <% else %>
             <%= image_tag 'no_image', size: "50x50" %>
            <% end %><br>
-           <%= @user.name %>
+           <%= link_to user_path(@user) do%>
+           <% @user.name %>
+           <% end %>
        </td>
        <td><%= @book.title %></td>
        <td><%= @book.body %></td>
        <td><% if @book.user == current_user %>
-           <li><%= link_to edit_book_path(@book.id), class: 'btn btn-sm btn-success' do %>
-             Edit</li>
+             <%= link_to edit_book_path(@book.id), class: 'btn btn-sm btn-success' do %>
+              Edit
+             <% end %>
             <% end %>
-           <% end %>
        </td>
        <td> <% if @book.user == current_user %>
-            <%= link_to "Destroy", book_path(@book), method: :delete %>
-            <!--btn btn-sm btn-danger-->
+             <%= link_to book_path(@book), method: :delete, class: 'btn btn-sm btn-danger' do%>
+             Destroy
+             <% end %>
             <% end %>
        </td>
       </tr>

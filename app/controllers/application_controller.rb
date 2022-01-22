@@ -6,6 +6,12 @@ class ApplicationController < ActionController::Base
     user_path(current_user.id)
   end
 
+  def after_Sign_up_for(resource)
+    if sign_up
+     flash[:notice] = "Welcome! You are successfully signed up!"
+    end
+  end
+
 
 
 

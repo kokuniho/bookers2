@@ -7,23 +7,21 @@ class BooksController < ApplicationController
   def create
     @book=Book.new(book_params)
     @book.user_id = current_user.id
-    @book.save
-    redirect_to book_path
+    @user = current_user
+    if @book.save
+      redirect_to book_path(@book)
+      flash[:notice] ="You have created book successfully."
+    else
+      render :index
+    end
   end
 
   def index
-    @book=Book.new
+    @book=Book
     @books=Book.all
     @user = current_user
   end
 
-  def ensure_correct_user
-    @book = Book.find_by(id:params[:id])
-    if @book.user_id != @current_user.id
-      flash[:notice] = "権限がありません"
-      redirect_to("/books/index")
-    end
-  end
 
   def show
     @book=Book.find(params[:id])
@@ -33,13 +31,15 @@ class BooksController < ApplicationController
   def edit
      @book = Book.find(params[:id])
   end
-  
+
   def update
     book = Book.find(params[:id])
-    book.update(book_params)
-    redirect_to book_path(book.id)  
+    if book.update(book_params)
+       redirect_to book_path(book.id)
+       flash[:notice] ="You have updated book successfully."
+    end
   end
-  
+
   def destroy
     @book = Book.find(params[:id])
     @book.destroy

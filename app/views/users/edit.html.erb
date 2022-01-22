@@ -1,21 +1,33 @@
-<h1>User info</h1>
+<p =id="notice"></p>
+ <div class="container">
+  <div class="row">
+   <div class="col-sm-12 col-md-10 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h1>User info</h1>
 
-<%= form_with model: @user, url: user_registration_path, method: :patch, local:true do |f| %>
+      <%= form_with model: @user, url: user_path(@user), method: :patch, local:true do |f| %>
+         <div class="form-group">
+            <h4>Name</h4>
+            <%= f.text_field :name %>
+         </div>
+         <div class="form-group">
+            <h4>Image</h4>
+            <%= f.file_field :image, accept: "image/*" %>
+            <!--%= f.submit 'upload' %>-->
+         </div>
+         <div class="form-group">
+            <h4>Introduction</h4>
+            <%= f.text_area :introduction %>
+         </div>
+        <div class="form-group">
+          <%= f.submit "Update User", class: 'btn btn-secondary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<h4>Name</h4>
-  <%= f.text_field :name %>
-  <%= f.submit 'upload' %>
-  
-
-<h4>Image</h4>
-  <%= f.file_field :image, accept: "image/*" %>
-  <%= f.submit 'upload' %>
-  
 
 
-<h4>Introduction</h4>
-  <%= f.text_area :introduction %>
-  <%= f.submit 'Update User' %>
-  
 
-<% end %>
+
+

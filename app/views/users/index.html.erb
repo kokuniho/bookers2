@@ -1,1 +1,37 @@
-user 一覧！
+<%= render partial: 'list', locals:{ user: @user, book: Book.new } %>
+
+<div class="col-md-8 offset-md-1">
+    <h2>Users</h2>
+    <table class="table">
+     <thead>
+      <tr>
+       <th>Image</th>
+       <th>name</th>
+       <th colspan="3"></th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+        <% @users.each do |user| %>
+         <td><% if user.image.attached? %>
+            <%= image_tag user.image, size: "50x50" %>
+           <% else %>
+            <%= image_tag 'no_image', size: "50x50" %>
+           <% end %>
+         </td>
+        <td><%= user.name %></td>
+        <td><%= link_to user_path(user.id) do %>
+            <p>Show</p>
+            <% end %>
+        </td>
+      </tr>
+       <% end %>
+
+      </tbody>
+    </table>
+   </div>
+
+
+  </div>
+ </div>
+
