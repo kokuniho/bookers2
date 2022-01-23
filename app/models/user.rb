@@ -5,6 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :books, dependent: :destroy
   has_one_attached :image
+  
+   validates :name, presence: true
+   validates :introduction, presence: true
+
 
   def get_image
     if image.attached?

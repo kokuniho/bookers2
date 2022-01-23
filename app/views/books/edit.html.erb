@@ -1,5 +1,14 @@
 
-<p =id="notice"></p>
+
+<p =id="notice">
+<% if @book.errors.any? %>
+<%= @book.errors.count %>error prohibited this obj from being saved:
+<ul>
+<% @book.errors.full_messages.each do |message| %>
+<li><%= message %></li>
+<% end %> 
+</ul><% end %>
+</p>
  <div class="container">
   <div class="row">
    <div class="col-sm-12 col-md-10 col-lg-5 px-5 px-sm-0 mx-auto">
