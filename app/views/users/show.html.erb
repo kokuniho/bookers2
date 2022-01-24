@@ -13,11 +13,14 @@
      <tbody>
       <tr>
         <% @books.each do |book| %>
-        <td><% if @user.image.attached? %>
-            <%= image_tag @user.image, size: "50x50" %>
+        <td>
+         <%= link_to user_path(@user) do %>
+          <% if @user.profile_image.attached? %>
+            <%= image_tag @user.profile_image, size: "50x50" %>
            <% else %>
             <%= image_tag 'no_image', size: "50x50" %>
            <% end %>
+         <% end %>
        </td>
        <td> <%= link_to book_path(book.id) do %>
              <%= book.title %>
@@ -29,5 +32,6 @@
       </tbody>
     </table>
    </div>
+   
   </div>
  </div>
