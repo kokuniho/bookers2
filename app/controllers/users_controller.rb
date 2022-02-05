@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
-   before_action :correct_user, only: [:edit]
-  
-  
+   before_action :authenticate_user!
+   before_action :ensure_guest_user, only: [:edit]
+  # before_action :correct_user, only: [:edit]
+
+
+
   def show
 
     @user=User.find(params[:id])
@@ -43,12 +46,19 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)
   end
-  
+
   def correct_user
     @user = User.find(params[:id])
-    
-     redirect_to(user_session_path) unless @user == current_user
-   end
+
+     redirect_to(user_session_path(user_id)) unless @user == current_user
+  end
+
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.name == "guestuser"
+      redirect_to user_path(current_user) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+    end
+  end
 end
 
 # 　def update_resource(resource, params)
