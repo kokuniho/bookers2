@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     @books=Book.where(user_id:@user.id)
     # @user =User.find_by(id: @book.user_id)
     # @user=@books.user
+    
   end
 
   def index

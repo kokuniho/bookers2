@@ -21,7 +21,7 @@
      </thead>
      <tbody>
       <tr>
-     
+
        <% @users.each do |user| %>
          <% @books.each do |book| %>
         <td>
@@ -34,12 +34,14 @@
                <% end %>
               <% end %>
         </td>
-      
+
        <td> <%= link_to book_path(book.id) do %>
              <%= book.title %>
             <% end %>
        </td>
        <td><%= book.body %></td>
+       <td><%= render "favorites/fav", book: book %></td>
+       <td>コメント数<%= book.book_comments.count %></td>
       </tr>
        <% end %>
     <% end %>
