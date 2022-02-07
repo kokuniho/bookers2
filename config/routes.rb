@@ -9,7 +9,11 @@ Rails.application.routes.draw do
     resources:book_comments, only:[:create, :destroy]
     resource :favorites, only:[:create, :destroy]
   end
-  resources :users,only:[:show, :edit, :update, :index ]
+  resources :users,only:[:show, :edit, :update, :index ] do
+    resource :relationships, only:[:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
+  end
 
   devise_scope :user do
     post 'users/guest_sign_in',to: 'users/sessions#guest_sign_in'

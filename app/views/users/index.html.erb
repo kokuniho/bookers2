@@ -12,7 +12,7 @@
      </thead>
      <tbody>
       <tr>
-        
+
          <% @users.each do |user| %>
          <td>
            <% if user.profile_image.attached? %>
@@ -20,9 +20,13 @@
            <% else %>
             <%= image_tag 'no_image', size: "50x50" %>
            <% end %>
-          
+
          </td>
         <td><%= user.name %></td>
+        <td>フォロー数：<%= user.followings.count %></td>
+        <td>フォロワー数：<%= user.followers.count %></td>
+        <td><%= render 'relationships/btn', user: user %></td>
+
         <td><%= link_to user_path(user.id) do %>
             <p>Show</p>
             <% end %>
