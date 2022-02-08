@@ -28,7 +28,7 @@
        </td>
        <td><%= @book.title %></td>
        <td><%= @book.body %></td>
-       <td><%= render "favorites/fav", book: @book %></td>
+       <td id="favorite_buttons_<%= @book.id %>"><%= render "favorites/fav", book: @book %></td>
 
        <td><% if @book.user == current_user %>
              <%= link_to edit_book_path(@book.id), class: 'btn btn-sm btn-success' do %>
