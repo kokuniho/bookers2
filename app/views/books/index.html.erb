@@ -22,13 +22,13 @@
      <tbody>
       <tr>
 
-       <% @users.each do |user| %>
+       <!--% @users.each do |user| %>-->
          <% @books.each do |book| %>
         <td>
 
-            <%= link_to user_path(user.id) do %>
-               <% if user.profile_image.attached? %>
-                <%= image_tag user.profile_image, size: "50x50" %>
+            <%= link_to (book.user) do %>
+               <% if book.user.profile_image.attached? %>
+                <%= image_tag book.user.get_profile_image, size:"50x50" %>
                <% else %>
                 <%= image_tag 'no_image', size: "50x50" %>
                <% end %>
@@ -43,8 +43,8 @@
        <td id="favorite_buttons_<%= book.id %>"><%= render "favorites/fav", book: book %></td>
        <td class="book-comments-counter"><% render 'book_comments/counter', book: book %></td>
       </tr>
+
        <% end %>
-    <% end %>
       </tbody>
     </table>
    </div>
